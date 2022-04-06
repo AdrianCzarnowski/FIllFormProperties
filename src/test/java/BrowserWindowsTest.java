@@ -14,8 +14,16 @@ public class BrowserWindowsTest extends TestBase{
         BrowserWindowsPage browserWindowsPage = new BrowserWindowsPage(driver);
         browserWindowsPage
                 .newBrowserButton()
+                .switchTo()
+                .mountains()
+                .close()
                 .newWindowMessage()
+                .switchTo()
                 .text()
-                .newBrowserTabButton();
+                .close()
+                .newBrowserTabButton()
+                .switchTo()
+                .mountains()
+                .close();
     }
 }

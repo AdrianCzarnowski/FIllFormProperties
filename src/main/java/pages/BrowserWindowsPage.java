@@ -3,14 +3,11 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
 
-public class BrowserWindowsPage {
+public class BrowserWindowsPage extends BasePage {
     private static Logger log = LoggerFactory.getLogger("BrowserWindowsPage.class");
 
     @FindBy(css="#newBrowserWindow")
@@ -21,33 +18,47 @@ public class BrowserWindowsPage {
     WebElement textNewWebsite;
     @FindBy(css="#newBrowserTab")
     WebElement newBrowserTabButton;
+    String winHandle = driver.getWindowHandle();
 
     public BrowserWindowsPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
-
     public BrowserWindowsPage newBrowserButton () {
-        newBrowserTabButton.click();
+        winHandle = driver.getWindowHandle();
+        newBrowserWindowButton.click();
         return this;
     }
 
     public BrowserWindowsPage newWindowMessage () {
+        winHandle = driver.getWindowHandle();
         newWindowMessage.click();
         return  this;
     }
 
     public BrowserWindowsPage text () {
-        String text = "Knowledge increases by sharing but not by saving. Please share this website with your friends and in your organization.";
-        assertThat(textNewWebsite.getText(), equalTo(text));
+        log.info(textNewWebsite.getText());
         return this;
     }
     public BrowserWindowsPage newBrowserTabButton () {
+        winHandle = driver.getWindowHandle();
         newBrowserTabButton.click();
         return this;
     }
-
-
-
-
+    public BrowserWindowsPage switchTo() {
+        for (String s : driver.getWindowHandles()) {
+            driver.switchTo().window(s);
+        }
+        return this;
+    }
+    public BrowserWindowsPage mountains() {
+        TablesPage tablesPage = new TablesPage(driver);
+        tablesPage.pickMountain();
+        return this;
+    }
+    public BrowserWindowsPage close() {
+        driver.close();
+        driver.switchTo().window(winHandle);
+        return this;
+    }
 }
