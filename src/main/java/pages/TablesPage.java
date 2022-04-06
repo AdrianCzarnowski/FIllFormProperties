@@ -33,10 +33,10 @@ public class TablesPage {
             String state = row.findElement(By.xpath("./td[3]")).getText();
 
             if (height >4000 && state.contains("Switzerland")) {
-                List<WebElement> cols = row.findElements(By.cssSelector("td"));
-                List<WebElement> cols1 = row.findElements(By.cssSelector("th"));
-                List<WebElement> range = row.findElements(By.cssSelector("td:nth-child(3)"));
-                log.info("Rank: " + cols1.get(0).getText() + " <<Peak: " + cols.get(0).getText() + " <<Mountain rage: " + range.get(0).getText());
+                List<WebElement> ranks = row.findElements(By.cssSelector("th"));
+                List<WebElement> peaks = row.findElements(By.cssSelector("td"));
+                List<WebElement> ranges = row.findElements(By.cssSelector("td:nth-child(3)"));
+                log.info("Rank: " + ranks.get(0).getText() + " <<Peak: " + peaks.get(0).getText() + " <<Mountain rage: " + ranges.get(0).getText());
             }
         }
         return this;
