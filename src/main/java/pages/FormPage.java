@@ -12,7 +12,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Random;
 
-public class FormPage {
+public class FormPage extends  BasePage{
 
     private static Logger log = LoggerFactory.getLogger("FormPage.class");
 
@@ -49,7 +49,7 @@ public class FormPage {
     public static int randomContinent = new Random().nextInt(NUMBER_OF_CONTINENTS);
 
     public FormPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     public FormPage setFirstName(String name) {

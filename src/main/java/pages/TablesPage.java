@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-public class TablesPage {
+public class TablesPage extends BasePage {
     private static Logger log = LoggerFactory.getLogger("TablesPage.class");
 
     @FindBy(css = "tbody tr")
