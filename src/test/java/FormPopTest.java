@@ -25,7 +25,7 @@ public class FormPopTest extends TestBase {
                 .selectCommands()
                 .setFile()
                 .setSingInButton();
-        assertThat(formPage.getValidationMsg(), equalTo("Form send with success"));
+        assertThat(formPage.getValidationMsg(), equalTo(System.getProperty("message")));
 
     }
 }
