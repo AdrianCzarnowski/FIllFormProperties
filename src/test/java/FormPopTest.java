@@ -12,12 +12,12 @@ public class FormPopTest extends TestBase {
 
     @Test
     public void shouldFIllFormWithSuccess() {
-        driver.get(URL);
         FormPage formPage = new FormPage(driver);
-        formPage.setFirstName("Jan")
-                .setLastName("Nowak")
-                .setEmail("jannowak@wp.pl")
-                .setAge(20)
+
+        formPage.setFirstName(System.getProperty("firstName"))
+                .setLastName(System.getProperty("lastName"))
+                .setEmail(System.getProperty("email"))
+                .setAge(Integer.parseInt(System.getProperty("age")))
                 .selectRandomGender()
                 .selectRandomExperience()
                 .selectRandomProfession()

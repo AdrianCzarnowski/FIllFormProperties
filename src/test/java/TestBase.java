@@ -1,4 +1,7 @@
+import configuration.BrowserEnvironment;
+import configuration.EnvironmentProperty;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,25 +13,23 @@ import org.slf4j.LoggerFactory;
 public class TestBase {
 
     private static Logger log = LoggerFactory.getLogger("TestBase.class");
-    public static final String URL = "https://seleniumui.moderntester.pl/form.php";
-    public WebDriver driver;
+    protected static WebDriver driver;
+    private static BrowserEnvironment browserEnvironment;
+    private static EnvironmentProperty environmentProperty;
 
 
     @BeforeAll
     static void beforeAll() {
-        WebDriverManager.chromedriver().setup();
+        environmentProperty = EnvironmentProperty.getInstance();
+        browserEnvironment = new BrowserEnvironment();
+        driver = browserEnvironment.getDriver();
     }
 
-    @BeforeEach
-    void beforeEach() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-    }
-
-    @AfterEach
-    void tearDown() {
+    @AfterAll
+    static void tearDown() {
         driver.manage().deleteAllCookies();
         driver.quit();
+        log.debug("<<<<<<<<<<<<<<Driver CLOSE<<<<<<<<<<<<<<<<");
     }
 }
 
